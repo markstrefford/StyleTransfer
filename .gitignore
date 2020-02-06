@@ -2,5 +2,6 @@
 *.gz
 automated-deep-photo-style-transfer/*.png
 automated-deep-photo-style-transfer/result*
-*.png
+#*.png
 *.jpg
+*.pyc
