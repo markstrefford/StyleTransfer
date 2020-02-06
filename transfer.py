@@ -167,7 +167,7 @@ def run_bulk(config):
                     save_image(img.clamp_(0, 1), fname_output, padding=0)
             else:
                 for _transfer_at in get_all_transfer():
-                    with Timunpooler('Elapsed time in whole WCT: {}', config.verbose):
+                    with Timer('Elapsed time in whole WCT: {}', config.verbose):
                         postfix = '_'.join(sorted(list(_transfer_at)))
                         fname_output = _output.replace('.png', '_{}_{}.png'.format(config.option_unpool, postfix))
                         print('------ transfer:', fname)
