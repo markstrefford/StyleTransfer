@@ -137,13 +137,14 @@ def run_bulk(config):
     fnames = set(os.listdir(config.content)) & set(os.listdir(config.style))
     print('config.content={}'.format(os.listdir(config.content)))
     print('config.style={}'.format(os.listdir(config.style)))
-    print('fnames={}'.format(fnames))
+    print('fnames={}\n'.format(fnames))
 
     if config.content_segment and config.style_segment:
         fnames &= set(os.listdir(config.content_segment))
         fnames &= set(os.listdir(config.style_segment))
 
     for fname in tqdm.tqdm(fnames):
+        print('\n{}:'.format(fname))
         try:
             if not fname.endswith('.png'):
                 print('invalid file (should end with .png), ', fname)
@@ -153,6 +154,8 @@ def run_bulk(config):
             _content_segment = os.path.join(config.content_segment, fname) if config.content_segment else None
             _style_segment = os.path.join(config.style_segment, fname) if config.style_segment else None
             _output = os.path.join(config.output, fname)
+            print('_content={}, _content_segment={}, _style={}, _style_segment={}, _output={}'
+                  .format(_content, _content_segment, _style, _style_segment, _output))
 
             content = open_image(_content, config.image_size).to(device)
             style = open_image(_style, config.image_size).to(device)
@@ -160,6 +163,7 @@ def run_bulk(config):
             style_segment = load_segment(_style_segment, config.image_size)
 
             if not config.transfer_all:
+                print('if not config.transfer_all...')
                 with Timer('Elapsed time in whole WCT: {}', config.verbose):
                     postfix = '_'.join(sorted(list(transfer_at)))
                     fname_output = _output.replace('.png', '_{}_{}.png'.format(config.option_unpool, postfix))
@@ -169,6 +173,7 @@ def run_bulk(config):
                         img = wct2.transfer(content, style, content_segment, style_segment, alpha=config.alpha)
                     save_image(img.clamp_(0, 1), fname_output, padding=0)
             else:
+                print('if config.transfer_all...')
                 for _transfer_at in get_all_transfer():
                     with Timer('Elapsed time in whole WCT: {}', config.verbose):
                         postfix = '_'.join(sorted(list(_transfer_at)))
