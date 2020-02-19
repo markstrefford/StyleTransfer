@@ -157,10 +157,15 @@ def run_bulk(config):
             print('_content={}, _content_segment={}, _style={}, _style_segment={}, _output={}'
                   .format(_content, _content_segment, _style, _style_segment, _output))
 
+            print('Loading content')
             content = open_image(_content, config.image_size).to(device)
+            print('Loading style')
             style = open_image(_style, config.image_size).to(device)
+            print('Loading content_segment')
             content_segment = load_segment(_content_segment, config.image_size)
+            print('Loading style_segment')
             style_segment = load_segment(_style_segment, config.image_size)
+            print('Done')
 
             if not config.transfer_all:
                 print('if not config.transfer_all...')
