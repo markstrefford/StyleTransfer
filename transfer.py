@@ -19,7 +19,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 """
-
+import sys
 import os
 import tqdm
 import argparse
@@ -184,6 +184,7 @@ def run_bulk(config):
                             img = wct2.transfer(content, style, content_segment, style_segment, alpha=config.alpha)
                         save_image(img.clamp_(0, 1), fname_output, padding=0)
         except:
+            print('except: {}'.format(sys.exc_info()[0]))
             continue
 
 if __name__ == '__main__':
