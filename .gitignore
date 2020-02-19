@@ -5,3 +5,4 @@ automated-deep-photo-style-transfer/result*
 #*.png
 *.jpg
 *.pyc
+.idea/
