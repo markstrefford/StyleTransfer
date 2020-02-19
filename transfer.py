@@ -135,6 +135,9 @@ def run_bulk(config):
 
     # The filenames of the content and style pair should match
     fnames = set(os.listdir(config.content)) & set(os.listdir(config.style))
+    print('config.content={}'.format(os.listdir(config.content)))
+    print('config.style={}'.format(os.listdir(config.style)))
+    print('fnames={}'.format(fnames))
 
     if config.content_segment and config.style_segment:
         fnames &= set(os.listdir(config.content_segment))
