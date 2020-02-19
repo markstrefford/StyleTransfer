@@ -77,7 +77,7 @@ def change_seg(seg):
 def load_segment(image_path, image_size=None):
     if not image_path:
         return np.asarray([])
-    image = Image.open(image_path)
+    image = Image.open(image_path).convert('RGB')
     if image_size is not None:
         transform = transforms.Resize(image_size, interpolation=Image.NEAREST)
         image = transform(image)
