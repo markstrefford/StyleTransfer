@@ -135,9 +135,6 @@ def run_bulk(config):
 
     # The filenames of the content and style pair should match
     fnames = set(os.listdir(config.content)) & set(os.listdir(config.style))
-    print('config.content={}'.format(os.listdir(config.content)))
-    print('config.style={}'.format(os.listdir(config.style)))
-    print('fnames={}\n'.format(fnames))
 
     if config.content_segment and config.style_segment:
         fnames &= set(os.listdir(config.content_segment))
@@ -154,16 +151,10 @@ def run_bulk(config):
             _content_segment = os.path.join(config.content_segment, fname) if config.content_segment else None
             _style_segment = os.path.join(config.style_segment, fname) if config.style_segment else None
             _output = os.path.join(config.output, fname)
-            print('_content={}, _content_segment={}, _style={}, _style_segment={}, _output={}'
-                  .format(_content, _content_segment, _style, _style_segment, _output))
 
-            print('Loading content')
             content = open_image(_content, config.image_size).to(device)
-            print('Loading style')
             style = open_image(_style, config.image_size).to(device)
-            print('Loading content_segment')
             content_segment = load_segment(_content_segment, config.image_size)
-            print('Loading style_segment')
             style_segment = load_segment(_style_segment, config.image_size)
             print('Done')
 
